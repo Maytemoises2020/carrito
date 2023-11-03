@@ -23,20 +23,20 @@ include('include/menu.php');
                     <h4>REGISTRO DE PROVEEDORES</h4>
                     <div class="card">
                         <div class="card-body">
-                            <form action="operaciones/registarUsario.php" method="POST">
+                            <form action="operaciones/registrarProveedor.php" method="POST">
                                 <div class="form-group row">
                                     <label class="col-lg-2 col-md-2 col-sm-12">RUC:</label>
-                                    <input type="number" name="dni"class="form-control col-lg-4 col-md-4 col-sm-12" required>
+                                    <input type="number" name="ruc"class="form-control col-lg-4 col-md-4 col-sm-12" required>
                                 </div>
 
                                 <div class="form-group row">
                                     <label class="col-lg-2 col-md-2 col-sm-12">RAZON SOCIAL:</label>
-                                    <input type="text" name="apellidosNombres"class="form-control col-lg-7 col-md-10 col-sm-12" required>
+                                    <input type="text" name="razonSocial"class="form-control col-lg-7 col-md-10 col-sm-12" required>
                                 </div>
 
                                 <div class="form-group row">
                                     <label class="col-lg-2 col-md-2 col-sm-12">EMAIL:</label>
-                                    <input type="email" name="correo"class="form-control col-lg-7 col-md-10 col-sm-12" required>
+                                    <input type="email" name="email"class="form-control col-lg-7 col-md-10 col-sm-12" required>
                                 </div>
 
                                 <div class="form-group row">

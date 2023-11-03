@@ -1,3 +1,5 @@
+<?php include("include/conexion.php");?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -23,7 +25,7 @@ include('include/menu.php');
                     <h4>REGISTRO DE USUARIOS</h4>
                     <div class="card">
                         <div class="card-body">
-                            <form action="operaciones/registarUsario.php" method="POST">
+                            <form action="operaciones/registarUsario.php" method="POST" enctype="multipart/form-data">
                                 <div class="form-group row">
                                     <label class="col-lg-2 col-md-2 col-sm-12">DNI:</label>
                                     <input type="number" name="dni"class="form-control col-lg-4 col-md-4 col-sm-12" required>
@@ -52,18 +54,24 @@ include('include/menu.php');
                                     <label class="col-lg-2 col-md-2 col-sm-12">FECHA NACIMIENTO:</label>
                                     <input type="date" name="fechaNacimiento"class="form-control col-lg-4 col-md-4 col-sm-12" required>
                                 </div>
-                                <div class="form-group row">
-                                    <label class="col-lg-2 col-md-2 col-sm-12">PASSWORD:</label>
-                                    <input type="password" name="fechaNacimiento"class="form-control col-lg-4 col-md-4 col-sm-12" required>
-                                </div>
+                                
                                 <div class="form-group row">
                                     <label class="col-lg-2 col-md-2 col-sm-12">FOTO:</label>
-                                    <input type="file" name="fechaNacimiento"class="form-control col-lg-4 col-md-4 col-sm-12" required>
+                                    <input type="file" name="foto"class="form-control col-lg-4 col-md-4 col-sm-12" required accept="image/*">
                                 </div>
                                 <div class="form-group row">
-                                    <label class="col-lg-2 col-md-2 col-sm-12">ACTIVO:</label>
-                                    <input type="text" name="fechaNacimiento"class="form-control col-lg-4 col-md-4 col-sm-12" required>
+                                    <label class="col-lg-2 col-md-2 col-sm-12">ROL:</label>
+                                    <select name="id_rol" id="" class="form-control col-lg-4 col-md-4 col-sm-12">
+                                        <option value=""></option>
+                                        <?php $b_roles ="SELECT * FROM roles";
+                                        $r_b_roles = mysqli_query($conexion, $b_roles);
+                                        while ($datos_roles = mysqli_fetch_array($r_b_roles)){?>
+                                                <option value="<?php echo $datos_roles['id']; ?>"><?php echo $datos_roles['nombre']; ?></option>
+                                        <?php }
+                                        ?>
+                                    </select>
                                 </div>
+
                                 <div class="form-group row">
                                     <label class="col-lg-2 col-md-2 col-sm-12"></label>
                                         <button type="submit" class="btn btn-dark">GUARDAR</button>

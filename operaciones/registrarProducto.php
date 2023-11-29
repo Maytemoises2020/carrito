@@ -3,8 +3,8 @@ include("../include/conexion.php");
 
 $codigo=$_POST['codigo'];
 $descripcion=$_POST['descripcion'];
-$categoria=$_POST['id_categoria'];
 $detalle=$_POST['detalle'];
+$categoria=$_POST['id_categoria'];
 $precioCompra=$_POST['precio_compra'];
 $precioVenta=$_POST['precio_venta'];
 $stock=$_POST['stock'];

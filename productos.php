@@ -1,6 +1,5 @@
 <?php include("include/conexion.php");?>
 
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,6 +10,11 @@
     <link href="plantilla/Admin/vertical/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
     <link href="plantilla/Admin/vertical/assets/css/icons.min.css" rel="stylesheet" type="text/css" />
     <link href="plantilla/Admin/vertical/assets/css/theme.min.css" rel="stylesheet" type="text/css" />
+    <!-- Plugins css -->
+    <link href="plantilla/Admin/plugins/datatables/dataTables.bootstrap4.css" rel="stylesheet" type="text/css" />
+    <link href="plantilla/Admin/plugins/datatables/responsive.bootstrap4.css" rel="stylesheet" type="text/css" />
+    <link href="plantilla/Admin/plugins/datatables/buttons.bootstrap4.css" rel="stylesheet" type="text/css" />
+    <link href="plantilla/Admin/plugins/datatables/select.bootstrap4.css" rel="stylesheet" type="text/css" />
 
 </head>
 <body>
@@ -23,79 +27,56 @@ include('include/menu.php');
         <div class="container-fluid"> <!--conteiner solo se usa el 80% de la pantalla conteiner-fluid ocupa todo-->
             <div class="row"><!--row ayuda a ser responsive pero en bootstrap-->
                 <div class="col-12">
-                    <h4>REGISTRO DE PRODUCTOS</h4>
+
+                    <?php include("include/modal_frm_reg_productos.php"); ?>
+                    <h4>LISTA DE PRODUCTOS</h4>
                     <div class="card">
                         <div class="card-body">
-                            <form action="operaciones/registrarProducto.php" method="POST" enctype="multipart/form-data">
-                                <div class="form-group row">
-                                    <label class="col-lg-2 col-md-2 col-sm-12">CODIGO:</label>
-                                    <input type="number" name="codigo"class="form-control col-lg-4 col-md-4 col-sm-12" required>
-                                </div>
 
-                                <div class="form-group row">
-                                    <label class="col-lg-2 col-md-2 col-sm-12">DESCRIPCION:</label>
-                                    <input type="text" name="descripcion"class="form-control col-lg-7 col-md-10 col-sm-12" required>
-                                </div>
+                            <table id="basic-datatable" class="table dt-responsive nowrap">
+                                <thead>
+                                    <tr>
+                                        <th>NRO REGISTRO</th>
+                                        <th>IMAGEN</th>
+                                        <th>CODIGO</th>
+                                        <th>DESCRIPCION</th>
+                                        <th>DETALLE</th>
+                                        <th>ID CATEGORIA</th>
+                                        <th>PRECIO COMPRA</th>
+                                        <th>PRECIO VENTA</th>
+                                        <th>STOCK</th>
+                                        <th>ESTADO</th>
+                                        <th>ID PROVEEDOR</th>
 
-                                <div class="form-group row">
-                                    <label class="col-lg-2 col-md-2 col-sm-12">DETALLE:</label>
-                                    <input type="text" name="detalle"class="form-control col-lg-7 col-md-10 col-sm-12" required>
-                                </div>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php 
+                                    $consulta="SELECT * FROM producto";
+                                    $ejecutar= mysqli_query($conexion, $consulta);
+                                    $contador = 0;
+                                    while ($respuesta = mysqli_fetch_array($ejecutar)) {
+                                        $contador +=1; 
+                                        echo "<tr>";
+                                        echo "<td>".$contador."</td>";
+                                        echo "<td>".$respuesta['imagen']."</td>";
+                                        echo "<td>".$respuesta['codigo']."</td>";
+                                        echo "<td>".$respuesta['descripcion']."</td>";
+                                        echo "<td>".$respuesta['detalle']."</td>";
+                                        echo "<td>".$respuesta['id_categoria']."</td>";
+                                        echo "<td>".$respuesta['precio_compra']."</td>";
+                                        echo "<td>".$respuesta['precio_venta']."</td>";
+                                        echo "<td>".$respuesta['stock']."</td>";
+                                        echo "<td>".$respuesta['estado']."</td>";
+                                        echo "<td>".$respuesta['id_proveedor']."</td>";
+                                        echo "<td><button class= 'btn btn-success'>Editar</button> <button class= 'btn btn-danger'>Eliminar</button></td>";
+                                        echo "</tr>";
 
-                                <div class="form-group row">
-                                    <label class="col-lg-2 col-md-2 col-sm-12">CATEGORIA:</label>
-                                    <select name="id_categoria" id="" class="form-control col-lg-4 col-md-4 col-sm-12">
-                                        <option value=""></option>
-                                        <?php $b_categoria ="SELECT * FROM categoria";
-                                        $r_b_categoria = mysqli_query($conexion, $b_categoria);
-                                        while ($datos_categoria = mysqli_fetch_array($r_b_categoria)){?>
-                                                <option value="<?php echo $datos_categoria['id']; ?>"><?php echo $datos_categoria['nombre']; ?></option>
-                                        <?php }
-                                        ?>
-                                    </select>
-                                </div>
+                                    }
+                                    ?>
+                                </tbody>
+                            </table>
 
-                                <div class="form-group row">
-                                    <label class="col-lg-2 col-md-2 col-sm-12">PRECIO COMPRA:</label>
-                                    <input type="number" name="precio_compra"class="form-control col-lg-4 col-md-4 col-sm-12" required>
-                                </div>
-
-                                <div class="form-group row">
-                                    <label class="col-lg-2 col-md-2 col-sm-12">PRECIO VENTA:</label>
-                                    <input type="number" name="precio_venta"class="form-control col-lg-7 col-md-10 col-sm-12" required>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-lg-2 col-md-2 col-sm-12">STOCK:</label>
-                                    <input type="text" name="stock"class="form-control col-lg-4 col-md-4 col-sm-12" required>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-lg-2 col-md-2 col-sm-12">ESTADO:</label>
-                                    <input type="text" name="estado"class="form-control col-lg-4 col-md-4 col-sm-12" required>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-lg-2 col-md-2 col-sm-12">IMAGEN:</label>
-                                    <input type="file" name="foto" class="form-control col-lg-4 col-md-4 col-sm-12" required accept="image/*">
-                                </div>
-
-                                <div class="form-group row">
-                                    <label class="col-lg-2 col-md-2 col-sm-12">PROVEEDOR:</label>
-                                    <select name="id_proveedor" id="" class="form-control col-lg-4 col-md-4 col-sm-12">
-                                        <option value=""></option>
-                                        <?php $b_proveedor ="SELECT * FROM proveedor";
-                                        $r_b_proveedor = mysqli_query($conexion, $b_proveedor);
-                                        while ($datos_proveedor = mysqli_fetch_array($r_b_proveedor)){?>
-                                                <option value="<?php echo $datos_proveedor['id']; ?>"><?php echo $datos_proveedor['ruc']; ?></option>
-                                        <?php }
-                                        ?>
-                                    </select>
-                                </div>
-
-                                <div class="form-group row">
-                                    <label class="col-lg-2 col-md-2 col-sm-12"></label>
-                                        <button type="submit" class="btn btn-dark">GUARDAR</button>
-                                    
-                                </div>
-                            </form>
                         </div>  
                     </div>
                 </div>
@@ -111,6 +92,25 @@ include('include/menu.php');
     <script src="plantilla/Admin/vertical/assets/js/metismenu.min.js"></script>
     <script src="plantilla/Admin/vertical/assets/js/waves.js"></script>
     <script src="plantilla/Admin/vertical/assets/js/simplebar.min.js"></script>
+
+    <!-- third party js -->
+    <script src="plantilla/Admin/plugins/datatables/jquery.dataTables.min.js"></script>
+    <script src="plantilla/Admin/plugins/datatables/dataTables.bootstrap4.js"></script>
+    <script src="plantilla/Admin/plugins/datatables/dataTables.responsive.min.js"></script>
+    <script src="plantilla/Admin/plugins/datatables/responsive.bootstrap4.min.js"></script>
+    <script src="plantilla/Admin/plugins/datatables/dataTables.buttons.min.js"></script>
+    <script src="plantilla/Admin/plugins/datatables/buttons.bootstrap4.min.js"></script>
+    <script src="plantilla/Admin/plugins/datatables/buttons.html5.min.js"></script>
+    <script src="plantilla/Admin/plugins/datatables/buttons.flash.min.js"></script>
+    <script src="plantilla/Admin/plugins/datatables/buttons.print.min.js"></script>
+    <script src="plantilla/Admin/plugins/datatables/dataTables.keyTable.min.js"></script>
+    <script src="plantilla/Admin/plugins/datatables/dataTables.select.min.js"></script>
+    <script src="plantilla/Admin/plugins/datatables/pdfmake.min.js"></script>
+    <script src="plantilla/Admin/plugins/datatables/vfs_fonts.js"></script>
+    <!-- third party js ends -->
+
+    <!-- Datatables init -->
+    <script src="plantilla/Admin/vertical/assets/pages/datatables-demo.js"></script>
 
     <!-- App js -->
     <script src="plantilla/Admin/vertical/assets/js/theme.js"></script>

@@ -49,7 +49,7 @@ include('include/menu.php');
                                 </thead>
                                 <tbody>
                                     <?php 
-                                    $consulta="SELECT * FROM ventas";
+                                    $consulta="SELECT * FROM usuario";
                                     $ejecutar= mysqli_query($conexion, $consulta);
                                     $contador = 0;
                                     while ($respuesta = mysqli_fetch_array($ejecutar)) {

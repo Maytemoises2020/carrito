@@ -40,7 +40,6 @@ include('include/menu.php');
                                         <th>NRO REGISTRO</th>
                                         <th>SERIE VENTA</th>
                                         <th>NUMERO VENTA</th>
-                                        <th>APELLIDOS Y NOMBRES</th>
                                         <th>FECHA HORA Y VENTA</th>
                                         <th>MONTO TOTAL</th>
                                         <th>CLIENTE</th>

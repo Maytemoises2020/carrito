@@ -39,7 +39,6 @@
                         <a href="javascript: void(0);" class="has-arrow waves-effect"><i class="fas fa-cogs"></i>Ventas</a>
                         <ul>
                         <li><a href="ventas.php">Ventas</a></li>
-                        <li><a href="detalle_venta.php">Detalle venta</a></li>
                         </ul>
                     </li>
                     <li>
@@ -47,6 +46,9 @@
                     </li>
                     <li>
                         <a href="formulario.php" class="waves-effect"><i class="feather-users"></i>Usuarios</a>
+                    </li>
+                    <li>
+                        <a href="categoria.php" class="waves-effect"><i class="feather-users"></i>Categoria</a>
                     </li>
                     <li>
                         <a href="javascript: void(0);" class="has-arrow waves-effect "><i class="fas fa-cogs"></i>Pedidos</a>
